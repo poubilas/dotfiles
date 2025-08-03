@@ -13,8 +13,11 @@ settings:
   content.media.audio_capture:
     https://chatgpt.com: true
   content.notifications.enabled:
-    https://calendar.google.com: true
+    global: ask
+    https://calendar.google.com: false
     https://www.youtube.com: true
+  content.notifications.presenter:
+    global: qt
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: true
   fonts.default_size:
