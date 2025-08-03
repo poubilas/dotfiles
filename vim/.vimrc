@@ -1,1 +1,3 @@
-:set nu
+set nu
+set incsearch
+set hlsearch
