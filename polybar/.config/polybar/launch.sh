@@ -7,7 +7,7 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Verzögerung einstellen, damit Volumemodul rechts erscheint
-sleep 4
+sleep 3
 
 # for multimonitor
 if type "xrandr"; then
