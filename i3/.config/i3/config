@@ -148,7 +148,7 @@ exec --no-startup-id "i3-msg 'workspace 5; exec aerc'"
 # assign [class="Alacritty"] 1   # Terminal dann nur unter ws1 möglich
 assign [class="obsidian"] 3
 assign [class="qutebrowser"] 4
-assign [class="Thunderbird"] 5
+assign [class="aerc"] 5
 
 ########################################################################
 ########################################################################
