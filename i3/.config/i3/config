@@ -143,7 +143,7 @@ smart_gaps on
 exec --no-startup-id "i3-msg 'workspace 1; exec alacritty'"
 exec --no-startup-id "i3-msg 'workspace 3; exec obsidian'"
 exec --no-startup-id "i3-msg 'workspace 4; exec qutebrowser'"
-exec --no-startup-id "i3-msg 'workspace 5; exec aerc'"
+exec --no-startup-id "i3-msg 'workspace 5; exec alacritty -e aerc'"
 
 # assign [class="Alacritty"] 1   # Terminal dann nur unter ws1 möglich
 assign [class="obsidian"] 3
