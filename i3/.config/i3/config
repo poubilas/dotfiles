@@ -2,6 +2,9 @@ set $mod Mod4
 font pango:Hack 9
 floating_modifier $mod
 
+# rechte Menütaste zu Supertaste konfigurieren
+exec_always --no-startup-id xmodmap -e 'keycode 135 = Super_R'
+
 # start a terminal
 set $term alacritty
 bindsym $mod+Return exec $term
