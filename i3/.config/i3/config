@@ -257,3 +257,7 @@ exec --no-startup-id xautolock \
  -notifier "/home/patrick/dotfiles/i3/.config/i3/xautolog-notifier.sh" \
  -locker "systemctl suspend"
 
+# Mit Ctrl + Super + Pfeil rechts/links Workspaces wechseln
+bindsym Ctrl+$mod+Right workspace next
+bindsym Ctrl+$mod+Left workspace prev
+
