@@ -76,3 +76,6 @@ v() {
 i3config() {
     vim ~/dotfiles/i3/.config/i3/config "$@"
 }
+
+alias dot='cd "$HOME/dotfiles"'
+
