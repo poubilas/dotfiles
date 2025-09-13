@@ -79,3 +79,7 @@ i3config() {
 
 alias dot='cd "$HOME/dotfiles"'
 
+# ~/.bashrc
+sus() {
+  systemctl suspend "$@"
+}
