@@ -88,6 +88,7 @@ i3config() {
 
 alias dot='cd "$HOME/dotfiles"'
 alias dl='cd "$HOME/Downloads"'
+alias ls='ls -la'
 
 # ~/.bashrc
 sus() {
