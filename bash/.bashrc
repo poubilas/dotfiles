@@ -94,3 +94,8 @@ alias ls='ls -la'
 sus() {
   systemctl suspend "$@"
 }
+
+# zweiten Monitor auf Dell I aktivieren mit mon
+
+alias mon='xrandr --output eDP-1 --mode 1920x1080 --primary --pos 0x180; xrandr --output HDMI-2 --mode 3840x2160 --rate 30 --scale-from 2560x1440 --pos 1920x0 --filter bilinear'
+
