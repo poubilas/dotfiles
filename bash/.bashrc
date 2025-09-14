@@ -7,7 +7,16 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
+
+# PS1 farbig gestalten und zweizeilig mit aktuellem Ordner
+# PS1='[\u@\h \W]\$ '     # das ist der alte Prompt
+# Farbdefinitionen für PS1 Prompt
+YELLOW="\[\033[1;33m\]"
+BLUE="\[\033[1;34m\]"
+WHITE="\[\033[1;37m\]"
+RESET="\[\033[0m\]"
+# Prompt-Aufbau
+export PS1="${BLUE}[\u@\h$] ${YELLOW}\w${RESET} > "
 
 export LYNX_CFG="$HOME/.config/lynx/lynx.cfg"
 export LYNX_LSS="$HOME/.config/lynx/lynx.lss"
@@ -78,6 +87,7 @@ i3config() {
 }
 
 alias dot='cd "$HOME/dotfiles"'
+alias dl='cd "$HOME/Downloads"'
 
 # ~/.bashrc
 sus() {
