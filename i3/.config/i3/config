@@ -232,8 +232,10 @@ bindsym $mod+z exec firefox --new-window "https://chatgpt.com/g/g-679357f81aec81
 
 #exec_always setxkbmap -option grp:caps_toggle "us,ru" -option "grp:caps_toggle,grp_led:caps"
 
-exec xrandr --output HDMI-1 --mode 1920x1080 --rate 60 --scale 1x1
+#exec xrandr --output HDMI-1 --mode 1920x1080 --rate 60 --scale 1x1
 #exec xrandr --auto --output HDMI-1 --mode 1920x1080 --above HDMI-2
+# Displays: auf Laptops nur internes Panel aktivieren (Desktops bleiben unangetastet)
+exec --no-startup-id ~/.config/i3/boot-internal-only.sh
 
 exec feh --bg-fill ~/.config/i3/wallpaper.png
 
