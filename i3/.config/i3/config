@@ -237,6 +237,11 @@ bindsym $mod+z exec firefox --new-window "https://chatgpt.com/g/g-679357f81aec81
 # Displays: auf Laptops nur internes Panel aktivieren (Desktops bleiben unangetastet)
 # exec --no-startup-id ~/.config/i3/boot-internal-only.sh
 
+# neuer Versuch, Monitore automatisch zu erkennen, unabhängig von der Konfiguration
+exec_always --no-startup-id ~/.config/i3/smart-monitor.sh
+
+
+
 exec feh --bg-fill ~/.config/i3/wallpaper.png
 
 exec --no-startup-id dunst
