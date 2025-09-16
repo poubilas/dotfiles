@@ -12,7 +12,7 @@ if [ -n "$INTERNAL_OUTPUT" ] && [ -n "$EXTERNAL_OUTPUT" ]; then
     xrandr --output "$INTERNAL_OUTPUT" --primary --mode 1920x1080 --pos 0x0
 
     # Schritt 2: Kurze Pause, damit die erste Einstellung sicher angewendet wird
-    sleep 5
+    sleep 2
 
     # Schritt 3: Externen Monitor dazuschalten und konfigurieren
     xrandr --output "$EXTERNAL_OUTPUT" --mode 3840x2160 --rate 30 --scale-from 2560x1440 --pos 1920x0 --filter bilinear
