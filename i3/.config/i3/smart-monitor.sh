@@ -15,7 +15,7 @@ if [ -n "$INTERNAL_OUTPUT" ] && [ -n "$EXTERNAL_OUTPUT" ]; then
     sleep 2
 
     # Schritt 3: Externen Monitor dazuschalten und konfigurieren
-    xrandr --output "$EXTERNAL_OUTPUT" --mode 3840x2160 --rate 30 --scale-from 2560x1440 --pos 1920x0 --filter bilinear
+    xrandr --output "$EXTERNAL_OUTPUT" --mode 3840x2160 --rate 30 --pos 1920x0 --scale 1x1 --transform none
 
 # Fall 2: Nur der interne Monitor des Laptops ist aktiv
 elif [ -n "$INTERNAL_OUTPUT" ]; then
