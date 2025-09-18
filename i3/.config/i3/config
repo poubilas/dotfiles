@@ -268,3 +268,7 @@ exec --no-startup-id xautolock \
 bindsym Ctrl+$mod+Right workspace next
 bindsym Ctrl+$mod+Left workspace prev
 
+# AltGr + Space = Linksklick an aktueller Mausposition
+bindsym Mod5+space exec --no-startup-id xdotool click --clearmodifiers 1
+
+
