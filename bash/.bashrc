@@ -54,7 +54,7 @@ v() {
 }
 
 # Führt eine DuckDuckGo-Suche im Text-Browser lynx aus.
-?() {
+lynx_search() {
     # Prüfen, ob Suchbegriffe übergeben wurden.
     if [ $# -eq 0 ]; then
         echo "Benutzung: ? <Suchbegriff>"
@@ -90,6 +90,7 @@ alias dot='cd "$HOME/dotfiles"'
 alias dl='cd "$HOME/Downloads"'
 alias ls='ls -la'
 alias v='vim'
+alias \?='lynx_search'
 
 # ~/.bashrc
 sus() {
