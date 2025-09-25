@@ -16,6 +16,7 @@ stow
 obsidian
 qutebrowser
 aerc
+w3m
 zathura
 zathura-pdf-poppler
 lynx
