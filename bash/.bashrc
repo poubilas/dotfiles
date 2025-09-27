@@ -97,3 +97,14 @@ sus() {
   systemctl suspend "$@"
 }
 
+up-mirr() {
+  sudo cp /etc/pacman.d/mirrorlist{,.bak.$(date +%F-%H%M)}
+  rate-mirrors --entry-country=Germany \
+    --country-neighbors-per-country=0 \
+    --protocol https \
+    --country-test-mirrors-per-country 10 \
+    --top-mirrors-number-to-retest 20 \
+    --max-mirrors-to-output 20 \
+    --min-bytes-per-mirror 300000 \
+    arch | sudo tee /etc/pacman.d/mirrorlist 
+}
