@@ -276,5 +276,3 @@ bindsym Mod5+Return exec --no-startup-id xdotool mousemove 844 667 click 1 --cle
 
 # AltGr + Escape = Maus nach Bildschirmmitte links und Linksklick
 bindsym Mod5+Escape exec --no-startup-id xdotool mousemove 50 667 click 1 --clearmodifiers 1
-# AltGr + Escape = Maus nach Bildschirmmitte links und Linksklick
-bindsym Mod5+Escape exec --no-startup-id xdotool mousemove 50 667 click 1 --clearmodifiers 1
