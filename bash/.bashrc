@@ -107,4 +107,5 @@ up-mirr() {
     --max-mirrors-to-output 20 \
     --min-bytes-per-mirror 300000 \
     arch | sudo tee /etc/pacman.d/mirrorlist 
+    sudo pacman -Syyu
 }
