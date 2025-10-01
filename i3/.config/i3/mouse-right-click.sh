@@ -26,7 +26,7 @@ choose_x() {
 x_local="$(choose_x "$mw")"
 y_local=667
 
-absx=$(( offx + x_local ))
+absx=$(( offx + x_local -5 ))
 absy=$(( offy + y_local ))
 
 # Optionales Debug:
