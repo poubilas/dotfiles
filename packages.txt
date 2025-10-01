@@ -10,6 +10,8 @@ bluez
 bluez-utils
 libnotify
 xclip
+noto-fonts
+noto-fonts-emoji
 dunst
 jq
 picom
