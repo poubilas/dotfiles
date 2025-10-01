@@ -11,6 +11,7 @@ bluez-utils
 libnotify
 xclip
 dunst
+jq
 picom
 stow
 obsidian
