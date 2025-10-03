@@ -14,6 +14,8 @@ function sl --description "Bildschirm aus; nach X Minuten herunterfahren"
     set -l secs (math "$mins * 60")
     echo "Fahre in $mins Minute(n) herunter… (Ctrl+C zum Abbrechen)"
 
+    sleep 4
+
     # Bildschirm ausschalten
     if type -q kscreen-doctor
         kscreen-doctor --dpms off
