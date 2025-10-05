@@ -91,7 +91,6 @@ alias dl='cd "$HOME/Downloads"'
 alias ls='ls -la'
 alias v='vim'
 alias \?='lynx_search'
-alias nh='/home/patrick/.local/share/Newshosting/3.8.9/Newshosting-x86_64.AppImage'
 
 # ~/.bashrc
 sus() {
@@ -109,4 +108,10 @@ up-mirr() {
     --min-bytes-per-mirror 300000 \
     arch | sudo tee /etc/pacman.d/mirrorlist 
     sudo pacman -Syyu
+}
+
+nh() {
+  nohup "/home/patrick/.local/share/Newshosting/3.8.9/Newshosting-x86_64.AppImage" \
+    >/dev/null 2>&1 </dev/null &
+  disown
 }
