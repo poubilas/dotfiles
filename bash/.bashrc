@@ -91,6 +91,7 @@ alias dl='cd "$HOME/Downloads"'
 alias ls='ls -la'
 alias v='vim'
 alias \?='lynx_search'
+alias nh='/home/patrick/.local/share/Newshosting/3.8.9/Newshosting-x86_64.AppImage'
 
 # ~/.bashrc
 sus() {
