@@ -7,7 +7,7 @@ function jf
     
     set filename $argv[1]
     
-    set destination "root@192.168.178.75:/mnt/gemeinsam"
+    set destination "root@192.168.178.90:/mnt/gemeinsam"
     
     echo "Kopiere Datei: '$filename'"
     echo "Zum Ziel: '$destination'"
