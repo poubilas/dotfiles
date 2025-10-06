@@ -110,6 +110,30 @@ up-mirr() {
     sudo pacman -Syyu
 }
 
+jf() {
+    # Überprüfe, ob genau ein Argument (Dateiname) übergeben wurde
+    if [ "$#" -ne 1 ]; then
+        echo "Verwendung: jf <Dateiname>"
+        return 1
+    fi
+
+    local filename="$1"
+    local destination="root@192.168.178.90:/mnt/gemeinsam"
+
+    echo "Kopiere Datei: '$filename'"
+    echo "Zum Ziel: '$destination'"
+
+    # Führe den scp-Befehl aus: scp <Dateiname> <Ziel>
+    scp "$filename" "$destination"
+    local status=$?  # Speichere den Exit-Status von scp
+
+    # Überprüfe den Exit-Status des scp-Befehls
+    if [ "$status" -eq 0 ]; then
+        echo "✅ Datei erfolgreich kopiert."
+    else
+        echo "❌ FEHLER: Kopieren fehlgeschlagen. (scp Exit-Code: $status)"
+    fi
+}
 nh() {
   nohup "/home/patrick/.local/share/Newshosting/3.8.9/Newshosting-x86_64.AppImage" \
     >/dev/null 2>&1 </dev/null &
