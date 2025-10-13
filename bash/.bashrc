@@ -154,7 +154,7 @@ new () {
         # 4. Die 10 neuesten Einträge anzeigen (sortiert nach Zeit, neueste zuerst)
         # ls -lth: l=lang, t=Zeit, h=human readable (menschenlesbar)
         # head -n 11: 1 Zeile Header + 10 Einträge
-        command ls -lth | head -n 11
+        command ls -lth --color=always | head -n 11
     else
         # 5. Fehlermeldung ausgeben und Funktion beenden
         echo "Fehler: Das Verzeichnis '$target_dir' existiert nicht." >&2
