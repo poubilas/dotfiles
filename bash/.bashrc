@@ -141,3 +141,24 @@ nh() {
   disown
 }
 
+new () {
+    # 1. Variable definieren und Tilde (~) auf den Home-Pfad erweitern
+    local target_dir="$HOME/Downloads/Newshosting"
+
+    # 2. Prüfen, ob das Verzeichnis existiert
+    if [ -d "$target_dir" ]; then
+        # 3. Zum Verzeichnis wechseln
+        cd "$target_dir" || return 1 # '|| return 1' stellt sicher, dass die Funktion bei Fehler abbricht
+        echo "Gewechselt zu: $target_dir"
+
+        # 4. Die 10 neuesten Einträge anzeigen (sortiert nach Zeit, neueste zuerst)
+        # ls -lth: l=lang, t=Zeit, h=human readable (menschenlesbar)
+        # head -n 11: 1 Zeile Header + 10 Einträge
+        command ls -lth | head -n 11
+    else
+        # 5. Fehlermeldung ausgeben und Funktion beenden
+        echo "Fehler: Das Verzeichnis '$target_dir' existiert nicht." >&2
+        return 1
+    fi
+}
+
