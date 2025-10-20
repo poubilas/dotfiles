@@ -206,6 +206,8 @@ bindsym $mod+l exec "sleep 0.1 && i3lock --blur 5"
 
 ## Diese Tastaturbelegung aktiviert mit der Druck-Taste einen Screenshot direkt in die Zwischenablage
 bindsym Print exec flameshot gui -c
+# Mit Super + Print den Ausschnitt direkt in den Downloads-Ordner kopieren
+bindsym $mod+Print exec --no-startup-id "flameshot gui -p $HOME/Downloads"
 
 ## Tastaturbelegung, um direkt Perplexity mit Super + P und ChatGPT mit Super + C und Gemini mit Super + G in einem neuen Fenster zu öffnen
 bindsym $mod+p exec firefox --new-window https://www.perplexity.ai 
