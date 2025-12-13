@@ -232,6 +232,7 @@ class JGUKIChat:
         self.tavily = TavilyClient(api_key=self.tavily_api_key) if TAVILY_AVAILABLE and self.tavily_api_key else None
         self.ddgs = DDGS() if DDGS_AVAILABLE else None
         self.last_search_method = None  # Speichert welche Suchmethode zuletzt verwendet wurde
+        self.last_search_info = None    # Speichert Details zur letzten Suche (Anzahl Quellen, etc.)
 
         self.history_file = os.path.expanduser("~/.jgu_ki_chat_history")
         self.reasoning_effort: str = "medium"  # Standard: medium
@@ -471,15 +472,37 @@ class JGUKIChat:
     def web_search_tavily(self, query: str, max_results: int = 5):
         """Führt eine Websuche mit Tavily durch (bevorzugte Methode)."""
         try:
+            # Erkenne komplexe Recherche-Fragen und erhöhe Quellenanzahl
+            is_research_query = any(kw in query.lower() for kw in [
+                "vergleich", "compare", "analyse", "analyse", "forschung",
+                "research", "studie", "paper", "unterschied", "entwicklung"
+            ])
+
+            # Passe Tiefe und Anzahl an
+            depth = "advanced" if is_research_query else "basic"
+            results = max(max_results, 8) if is_research_query else max_results
+
             response = self.tavily.search(
                 query=query,
-                search_depth="advanced",  # "basic" oder "advanced"
-                max_results=max_results,
+                search_depth=depth,
+                max_results=results,
                 include_answer=True
             )
 
             output = []
-            output.append(f"🔍 Suchergebnisse für: {query}\n")
+
+            # Anzahl der gefundenen Quellen
+            num_results = len(response.get('results', []))
+
+            # Speichere Info für spätere Anzeige
+            self.last_search_info = {
+                'sources': num_results,
+                'depth': depth,
+                'method': 'Tavily'
+            }
+
+            output.append(f"🔍 Suchergebnisse für: {query}")
+            output.append(f"📊 Quellen verwendet: {num_results} | Suchtiefe: {depth}\n")
 
             # Direkte Antwort von Tavily (wenn verfügbar)
             if response.get('answer'):
@@ -513,8 +536,18 @@ class JGUKIChat:
             if not raw_results:
                 return None
 
+            num_results = min(len(raw_results), max_results)
+
+            # Speichere Info für spätere Anzeige
+            self.last_search_info = {
+                'sources': num_results,
+                'depth': 'basic',
+                'method': 'DuckDuckGo'
+            }
+
             output = []
-            output.append(f"🔍 Suchergebnisse für: {query}\n")
+            output.append(f"🔍 Suchergebnisse für: {query}")
+            output.append(f"📊 Quellen verwendet: {num_results} | Suchtiefe: basic\n")
 
             for i, result in enumerate(raw_results[:max_results], 1):
                 title = result.get('title', 'Kein Titel')
@@ -651,8 +684,9 @@ class JGUKIChat:
     def chat_completion(self, user_message: str, use_search: bool = False) -> Generator[str, None, None]:
         """Sendet eine Nachricht an die API und streamt die Antwort."""
 
-        # Zurücksetzen der letzten Suchmethode (wird ggf. in web_search() neu gesetzt)
+        # Zurücksetzen der letzten Such-Informationen (wird ggf. in web_search() neu gesetzt)
         self.last_search_method = None
+        self.last_search_info = None
 
         # Websuche bei Bedarf - erweiterte Trigger-Wörter
         search_context = ""
@@ -661,7 +695,11 @@ class JGUKIChat:
                           "letzte", "latest", "current", "jetzt", "gerade"]
 
         # Prüfe ob IRGENDEINE Suchmethode verfügbar ist (Tavily ODER DDGS)
-        if (self.tavily or self.ddgs) and (use_search or any(kw in user_message.lower() for kw in search_triggers)):
+        # Nur bei explizitem /w oder eindeutigen Aktualitäts-Anfragen
+        strong_triggers = ["aktuell", "heute", "news", "2025", "wetter", "weather", "preis", "kurs"]
+        should_search = use_search or any(kw in user_message.lower() for kw in strong_triggers)
+
+        if (self.tavily or self.ddgs) and should_search:
             # Websuche durchführen
             search_results = self.web_search(user_message)
             if search_results and "Fehler" not in search_results and "nicht verfügbar" not in search_results:
@@ -1042,9 +1080,13 @@ class JGUKIChat:
                             for chunk in self.chat_completion(arg, use_search=True):
                                 full_response += chunk
 
-                        # Zeige welche Suchmethode verwendet wurde
-                        if hasattr(self, 'last_search_method') and self.last_search_method:
-                            console.print(f"[dim]🔍 Websuche via: [bold]{self.last_search_method}[/bold][/dim]\n")
+                        # Zeige welche Suchmethode verwendet wurde mit Details
+                        if hasattr(self, 'last_search_info') and self.last_search_info:
+                            info = self.last_search_info
+                            console.print(
+                                f"[dim]🔍 Websuche via: [bold]{info['method']}[/bold] | "
+                                f"📊 Quellen: {info['sources']} | Suchtiefe: {info['depth']}[/dim]\n"
+                            )
 
                         if full_response:
                             self.display_response(full_response)
@@ -1063,8 +1105,12 @@ class JGUKIChat:
                         full_response += chunk
 
                 # Zeige welche Suchmethode verwendet wurde (falls Websuche getriggert wurde)
-                if hasattr(self, 'last_search_method') and self.last_search_method:
-                    console.print(f"[dim]🔍 Websuche via: [bold]{self.last_search_method}[/bold][/dim]\n")
+                if hasattr(self, 'last_search_info') and self.last_search_info:
+                    info = self.last_search_info
+                    console.print(
+                        f"[dim]🔍 Websuche via: [bold]{info['method']}[/bold] | "
+                        f"📊 Quellen: {info['sources']} | Suchtiefe: {info['depth']}[/dim]\n"
+                    )
 
                 if full_response:
                     self.display_response(full_response)
