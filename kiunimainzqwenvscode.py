@@ -275,7 +275,10 @@ class JGUKIChat:
                 "Bitte setzen Sie die Umgebungsvariable API_KEY:\n"
                 "[cyan]export API_KEY='Ihr-API-Schlüssel'[/cyan]\n\n"
                 "Den Schlüssel erhalten Sie unter:\n"
-                "[link]https://ki-chat.uni-mainz.de[/link] → Einstellungen → Konto",
+                "[link]https://ki-chat.uni-mainz.de[/link] → Einstellungen → Konto\n\n"
+                "Warum startet die App nicht?\n"
+                "Die App benötigt einen gültigen API-Key, um mit der KI-Chat-API der JGU Mainz zu kommunizieren. "
+                "Ohne diesen Schlüssel kann die App nicht auf die API zugreifen und startet daher nicht.",
                 title="🔑 API-Schlüssel fehlt",
                 border_style="red",
                 expand=True
