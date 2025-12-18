@@ -88,6 +88,7 @@ i3config() {
 
 alias dot='cd "$HOME/dotfiles"'
 alias dl='cd "$HOME/Downloads"'
+alias dev='cd "$HOME/dev"'
 alias ls='ls -la'
 alias v='vim'
 alias \?='lynx_search'
