@@ -172,6 +172,7 @@ for_window [class="mpv"] floating enable
 for_window [class="imv"] floating enable
 for_window [class="zenity"] floating enable
 for_window [class="cachyos-welcome"] floating enable
+for_window [class="Newshosting"] fullscreen enable
 
 
 ########################################################################
