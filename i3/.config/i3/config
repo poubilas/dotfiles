@@ -154,6 +154,7 @@ assign [class="firefox"] 2
 assign [class="obsidian"] 3
 assign [class="qutebrowser"] 4
 assign [class="aerc"] 5
+assign [class="Newshosting"] 6
 
 ########################################################################
 ########################################################################
