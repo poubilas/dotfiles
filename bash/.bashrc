@@ -33,6 +33,11 @@ nas() {
   ssh 192.168.178.186 "$@"
 }
 
+# Mit OpenClaw Rechner verbinden
+claw() {
+  ssh 192.168.178.55 "$@"
+}
+
 # Startet das System sofort neu.
 reb() {
   sudo reboot now "$@"
