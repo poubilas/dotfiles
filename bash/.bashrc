@@ -97,6 +97,7 @@ alias dev='cd "$HOME/dev"'
 alias ls='ls -la'
 alias v='vim'
 alias \?='lynx_search'
+alias idle='/home/patrick/dotfiles/i3/.config/i3/idle.sh'
 
 # ~/.bashrc
 sus() {
