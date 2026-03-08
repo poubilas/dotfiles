@@ -259,14 +259,8 @@ exec_always mkfifo /tmp/xobpipe && tail -f /tmp/xobpipe | xob -t 2170 & disown
 
 # exec --no-startup-id xautolock -time 10 -locker "systemctl suspend"
 
-# Benachrichtung 30s vor Bildschirmschoner
-
-exec --no-startup-id xautolock \
- -detectsleep \
- -time 10 \
- -notify 30 \
- -notifier "/home/patrick/dotfiles/i3/.config/i3/xautolog-notifier.sh" \
- -locker "systemctl suspend"
+# Benachrichtigung 30s vor Suspend, steuerbar ueber idle.sh
+exec --no-startup-id /home/patrick/dotfiles/i3/.config/i3/idle.sh 10
 
 # Mit Ctrl + Super + Pfeil rechts/links Workspaces wechseln
 bindsym Ctrl+$mod+Right workspace next
