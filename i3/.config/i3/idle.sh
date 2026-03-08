@@ -21,8 +21,15 @@ start_idle() {
 }
 
 status_idle() {
-  if pgrep -x xautolock >/dev/null; then
-    echo "xautolock aktiv"
+  local cmd
+  if cmd="$(pgrep -a -x xautolock | head -n1)"; then
+    local minutes
+    minutes="$(printf '%s\n' "$cmd" | sed -n 's/.*-time \([0-9][0-9]*\).*/\1/p')"
+    if [ -n "$minutes" ]; then
+      echo "Idle-Suspend aktiv: $minutes Minuten"
+    else
+      echo "Idle-Suspend aktiv"
+    fi
   else
     echo "Idle-Suspend deaktiviert"
   fi
