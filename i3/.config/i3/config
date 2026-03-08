@@ -1,6 +1,7 @@
 set $mod Mod4
 font pango:Hack 9
 floating_modifier $mod
+workspace_layout tabbed
 
 # rechte Menütaste zu Supertaste konfigurieren
 exec_always --no-startup-id xmodmap -e 'keycode 135 = Super_R'
