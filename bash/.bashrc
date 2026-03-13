@@ -94,10 +94,27 @@ i3config() {
 alias dot='cd "$HOME/dotfiles"'
 alias dl='cd "$HOME/Downloads"'
 alias dev='cd "$HOME/dev"'
-alias ls='ls -la'
 alias v='vim'
 alias \?='lynx_search'
 alias idle='/home/patrick/dotfiles/i3/.config/i3/idle.sh'
+
+unalias ls 2>/dev/null
+
+ls() {
+  if [ -t 1 ]; then
+    if command -v eza >/dev/null 2>&1; then
+      eza -al --color=always --group-directories-first --icons "$@" | less -RX
+    else
+      command ls -la --color=always "$@" | less -RX
+    fi
+  else
+    if command -v eza >/dev/null 2>&1; then
+      eza -al --color=always --group-directories-first --icons "$@"
+    else
+      command ls -la --color=always "$@"
+    fi
+  fi
+}
 
 # ~/.bashrc
 sus() {
@@ -168,4 +185,3 @@ new () {
         return 1
     fi
 }
-
