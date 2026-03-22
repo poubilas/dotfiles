@@ -186,3 +186,6 @@ new () {
         return 1
     fi
 }
+
+# Claude Code Pfad exportieren
+echo 'export PATH="$HOME/.local/bin:$PATH"'
