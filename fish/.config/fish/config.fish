@@ -10,5 +10,7 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 set -x LYNX_CFG "$HOME/.config/lynx/lynx.cfg"
 set -x LYNX_LSS "$HOME/.config/lynx/lynx.lss"
 
+alias bl='bluetoothctl'
+
 # Re-apply local overrides after the CachyOS config defines its aliases.
 source ~/.config/fish/functions/ls.fish
