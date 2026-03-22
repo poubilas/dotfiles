@@ -7,6 +7,7 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias bl='bluetoothctl'
 
 # PS1 farbig gestalten und zweizeilig mit aktuellem Ordner
 # PS1='[\u@\h \W]\$ '     # das ist der alte Prompt
