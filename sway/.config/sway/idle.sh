@@ -23,14 +23,12 @@ start_idle() {
   swayidle -w \
     timeout "$t_warn" \
       "dunstify -r $NOTIF_ID -u normal -t 30000 \
-        'Bildschirm wird ausgeschaltet' \
-        'Noch 30 Sekunden bis der Bildschirm ausgeht.'" \
+        'Computer wird gleich in Standby versetzt' \
+        'Noch 30 Sekunden bis zum Suspend.'" \
     resume \
       "dunstify -C $NOTIF_ID" \
     timeout "$t_off" \
-      'swaymsg "output * dpms off"' \
-    resume \
-      'swaymsg "output * dpms on"' \
+      'systemctl suspend' \
     2>/dev/null &
 }
 
@@ -38,9 +36,9 @@ status_idle() {
   if pgrep -x swayidle >/dev/null; then
     local t
     t="$(pgrep -a swayidle | grep -oP 'timeout \K[0-9]+' | sort -n | tail -n1)"
-    echo "Bildschirm-Timeout aktiv: $(( t / 60 )) Minuten"
+    echo "Suspend-Timeout aktiv: $(( t / 60 )) Minuten"
   else
-    echo "Bildschirm-Timeout deaktiviert"
+    echo "Suspend-Timeout deaktiviert"
   fi
 }
 
