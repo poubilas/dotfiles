@@ -188,4 +188,4 @@ new () {
 }
 
 # Claude Code Pfad exportieren
-echo 'export PATH="$HOME/.local/bin:$PATH"'
+export PATH="$HOME/.local/bin:$PATH"
