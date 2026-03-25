@@ -1,0 +1,25 @@
+# kanshi – automatische Monitorkonfiguration
+# Ersetzt smart-monitor.sh (xrandr) für Wayland/Sway
+#
+# Profile aktivieren automatisch wenn alle genannten Outputs angeschlossen sind.
+# "*" = beliebiger externer Monitor (Wildcard)
+#
+# Output-Namen ermitteln: swaymsg -t get_outputs | jq '.[].name'
+
+# Fall 1: Nur internes Display
+profile laptop-only {
+    output eDP-1 enable
+}
+
+# Fall 2: Laptop + externer Monitor (beliebig)
+# Externer Monitor rechts, beste verfügbare Auflösung
+profile laptop-with-external {
+    output eDP-1 mode 1920x1080 position 0,0
+    output "*"   position 1920,0
+}
+
+# Fall 3: Nur externer Monitor (zugeklappter Laptop)
+profile external-only {
+    output eDP-1 disable
+    output "*"   enable
+}

@@ -97,7 +97,7 @@ alias dl='cd "$HOME/Downloads"'
 alias dev='cd "$HOME/dev"'
 alias v='vim'
 alias \?='lynx_search'
-alias idle='/home/patrick/dotfiles/i3/.config/i3/idle.sh'
+alias idle='/home/patrick/dotfiles/bash/idle-wrapper.sh'
 
 unalias ls 2>/dev/null
 

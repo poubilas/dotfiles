@@ -1,0 +1,309 @@
+########################################################################
+####                   Grundkonfiguration
+########################################################################
+
+set $mod Mod4
+set $term alacritty
+
+font pango:Hack 11
+
+# Floating-Fenster mit Mod + Maus verschieben/skalieren
+floating_modifier $mod normal
+
+# Standard-Layout: Tabs
+workspace_layout tabbed
+
+########################################################################
+####                   Eingabe (Tastatur / Maus)
+########################################################################
+
+# Tastatur: deutsches Layout, rechte Menütaste als Super_R
+input type:keyboard {
+    xkb_layout de
+    xkb_options altwin:menu_win
+}
+
+# Touchpad
+input type:touchpad {
+    tap enabled
+    tap_button_map lrm
+    drag enabled
+    dwt enabled
+    natural_scroll disabled
+    scroll_method two_finger
+}
+
+########################################################################
+####                   Monitor-Verwaltung (kanshi)
+########################################################################
+
+# Monitorkonfiguration wird von kanshi übernommen (~/.config/kanshi/config)
+# kanshi wird im Autostart gestartet
+
+########################################################################
+####                   Tastenbelegung: Fensterverwaltung
+########################################################################
+
+bindsym $mod+Return exec $term
+bindsym $mod+q kill
+
+# Rofi Launcher
+bindsym ctrl+space exec "rofi -show combi -modi window,run,combi -combi-modi window,run"
+
+# Fokus bewegen
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Fenster verschieben
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# Split-Richtung
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+t split toggle
+
+# Vollbild
+bindsym $mod+f fullscreen toggle
+
+# Layout wechseln
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+w sticky toggle
+
+# Floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space       focus mode_toggle
+
+# Parent-Container fokussieren
+bindsym $mod+a focus parent
+
+########################################################################
+####                   Workspaces
+########################################################################
+
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
+set $ws10 "10"
+
+# Zu Workspace wechseln
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Fenster zu Workspace verschieben
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Workspaces per Ctrl+Super+Pfeil durchschalten
+bindsym Ctrl+$mod+Right workspace next
+bindsym Ctrl+$mod+Left  workspace prev
+
+########################################################################
+####                   Sway-Steuerung
+########################################################################
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Sway wirklich beenden?' -b 'Ja, beenden' 'swaymsg exit'
+
+########################################################################
+####                   Resize-Modus
+########################################################################
+
+mode "resize" {
+    bindsym Left  resize shrink width  5 px or 5 ppt
+    bindsym Down  resize grow   height 5 px or 5 ppt
+    bindsym Up    resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow   width  5 px or 5 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+########################################################################
+####                   Statusleiste (waybar)
+########################################################################
+
+bar {
+    swaybar_command waybar
+}
+
+########################################################################
+####                   Farben
+########################################################################
+
+# class                   border   backgr.  text     indicator child_border
+client.focused            #ffaa00  #ffaa00  #ffffff  #ffaa00   #ffaa00
+client.focused_inactive   #000000  #000000  #ffffff  #000000   #000000
+client.unfocused          #000000  #000000  #888888  #000000   #000000
+client.urgent             #000000  #000000  #ffffff  #000000   #000000
+client.placeholder        #000000  #000000  #ffffff  #000000   #000000
+client.background         #ffffff
+
+########################################################################
+####                   Abstände und Rahmen
+########################################################################
+
+gaps inner 1
+smart_gaps on
+default_border pixel 1
+
+########################################################################
+####                   Workspace-Zuweisungen
+########################################################################
+
+assign [app_id="firefox"]      2
+assign [app_id="obsidian"]     3
+assign [class="obsidian"]      3
+assign [app_id="qutebrowser"]  4
+assign [class="Newshosting"]   6
+
+########################################################################
+####                   Workspace-Autostart
+########################################################################
+
+exec swaymsg 'workspace 1; exec alacritty'
+exec swaymsg 'workspace 2; exec firefox'
+exec swaymsg 'workspace 3; exec obsidian'
+exec swaymsg 'workspace 4; exec qutebrowser'
+exec swaymsg 'workspace 5; exec alacritty -e aerc'
+
+########################################################################
+####                   Floating-Fenster-Regeln
+########################################################################
+
+for_window [title="Calculator"]     floating enable
+for_window [title="Timer"]          floating enable
+for_window [app_id="mpv"]           floating enable
+for_window [app_id="imv"]           floating enable
+for_window [app_id="zenity"]        floating enable
+for_window [class="cachyos-welcome"] floating enable
+for_window [class="Newshosting"]    fullscreen enable
+
+# Firefox / Librewolf: kein Fensterrahmen
+for_window [app_id="firefox"]    border none
+for_window [app_id="librewolf"]  border none
+for_window [class="firefox"]     border none
+for_window [class="librewolf"]   border none
+
+########################################################################
+####                   Hotkeys: Audio
+########################################################################
+
+# Hardware-Tasten (Mediatasten)
+bindsym XF86AudioRaiseVolume exec sh -c 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk "{printf \"%d\\n\", \$2 * 100}" > /tmp/wobpipe'
+bindsym XF86AudioLowerVolume exec sh -c 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk "{printf \"%d\\n\", \$2 * 100}" > /tmp/wobpipe'
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# Tastaturkürzel: Ctrl+Pfeil (wie bisher)
+bindsym control+Up    exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym control+Down  exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym control+Left  exec pactl set-sink-mute   @DEFAULT_SINK@ toggle
+
+########################################################################
+####                   Hotkeys: Helligkeit
+########################################################################
+
+bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+########################################################################
+####                   Hotkeys: Diverses
+########################################################################
+
+bindsym $mod+Shift+p exec gnome-calculator
+bindsym $mod+l       exec swaylock -f --color 000000
+
+# Screenshots (grim + slurp, Wayland-nativ)
+# Hinweis Dell Latitude 7330: Fn+Druck nötig
+bindsym Print             exec ~/.config/sway/screenshot.sh
+bindsym Shift+Print       exec ~/.config/sway/screenshot.sh full
+bindsym $mod+Print        exec ~/.config/sway/screenshot.sh save
+bindsym $mod+Shift+Print  exec ~/.config/sway/screenshot.sh full save
+
+# Browser-Shortcuts
+bindsym $mod+p exec firefox --new-window https://www.perplexity.ai
+bindsym $mod+c exec firefox --new-window https://chatgpt.com/
+bindsym $mod+g exec firefox --new-window https://gemini.google.com/
+bindsym $mod+y exec firefox --new-window https://youtube.com
+bindsym $mod+m exec thunderbird
+bindsym $mod+k exec firefox --new-window https://keep.google.com
+bindsym $mod+z exec firefox --new-window "https://chatgpt.com/g/g-679357f81aec81919a017a3124b02cfe-youtube-transkript-ausfuhrlich-zusammenfassen"
+
+########################################################################
+####                   Hotkeys: Maus-Klick-Skripte (ydotool)
+########################################################################
+
+# Voraussetzung: ydotoold läuft (wird im Autostart gestartet)
+bindsym Mod5+space  exec ~/.config/sway/mouse-right-click.sh
+bindsym Mod5+Return exec ~/.config/sway/mouse-center-click.sh
+bindsym Mod5+Escape exec ~/.config/sway/mouse-left-click.sh
+
+########################################################################
+####                   Autostart
+########################################################################
+
+# Hintergrundbild (swaybg, ersetzt feh)
+output * bg ~/.config/sway/wallpaper.png fill
+
+# Helligkeit beim Start
+exec brightnessctl set 75%
+
+# Benachrichtigungen (dunst, Wayland-kompatibel ab v1.7)
+exec dunst
+
+# Akkuwarnung
+exec ~/.config/sway/battery-warn.sh
+
+# Farb-/Blaulichfilter (gammastep ersetzt redshift)
+exec gammastep
+
+# XDG-Autostart-Einträge
+exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+
+# Polkit-Agent
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# ydotool-Daemon (für Maus-Klick-Skripte)
+exec ydotoold
+
+# Lautstärke-OSD (wob, ersetzt xob)
+exec mkfifo /tmp/wobpipe && tail -f /tmp/wobpipe | wob &
+
+# Idle-Verwaltung / Auto-Suspend (swayidle, ersetzt xautolock)
+exec ~/.config/sway/idle.sh 10
+
+# Monitorkonfiguration (kanshi, ersetzt smart-monitor.sh)
+exec kanshi
+

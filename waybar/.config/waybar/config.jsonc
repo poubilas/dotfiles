@@ -1,0 +1,59 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 52,
+    "spacing": 4,
+
+    "modules-left":   ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right":  ["cpu", "memory", "battery", "pulseaudio", "tray"],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{index}"
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "  {:%H:%M}",
+        "tooltip-format": "{:%A, %d. %B %Y}"
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": "  {usage}%"
+    },
+
+    "memory": {
+        "interval": 2,
+        "format": "  {used:.1f} / 16 GB"
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "adapter": "AC",
+        "full-at": 98,
+        "interval": 5,
+        "format":           "{icon}  {capacity}%",
+        "format-charging":  "  {capacity}%",
+        "format-full":      "  Full",
+        "format-icons":     ["", "", "", "", ""],
+        "states": {
+            "warning": 30,
+            "critical": 10
+        }
+    },
+
+    "pulseaudio": {
+        "format":        "  {volume}%",
+        "format-muted":  "  Muted",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "scroll-step": 3
+    },
+
+    "tray": {
+        "spacing": 4,
+        "icon-size": 16
+    }
+}
