@@ -18,7 +18,7 @@ setfont ter-132b
 iwctl
 device list                                        # normalerweise wlan0
 station wlan0 get-networks
-station wlan0 connect 'FRITZ!Box 6660 Cable QK'   # auf beide ' achten!
+station wlan0 connect 'FRITZ!Box 6660 Cable QK5'   # auf beide ' achten!
 exit
 
 ping www.google.com -c 5
@@ -236,7 +236,7 @@ shutdown now    # USB-Stick entfernen!
 
 ```bash
 nmcli device wifi list
-nmcli device wifi connect 'FRITZ!Box 6660 Cable QK' --ask
+nmcli device wifi connect 'FRITZ!Box 6660 Cable QK5' --ask
 
 sudo pacman -S terminus-font
 setfont ter-132b
@@ -251,6 +251,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 cd ..
+rm -rf yay
 ```
 
 ---
@@ -267,6 +268,7 @@ sudo timeshift --create --comment "Neuinstallation $(date +%Y-%m-%d)" --tags D
 ### GRUB für Timeshift-Snapshots konfigurieren
 
 ```bash
+sudo pacman -S grub-btrfs
 sudo su
 echo "export EDITOR=vim" > ~/.bashrc
 source ~/.bashrc
@@ -350,7 +352,8 @@ sudo pacman -S \
     gnome-calculator \
     dex polkit-gnome \
     brightnessctl \
-    wpctl
+    wireplumber \
+    firefox firefox-i18n-de
 ```
 
 ### AUR (yay)
@@ -379,6 +382,7 @@ sudo usermod -aG input patrick
 
 ```bash
 cd ~/dotfiles
+rm ~/.bashrc
 stow sway waybar kanshi alacritty bash fish vim qutebrowser aerc rofi lynx
 source ~/.bashrc
 ```
@@ -513,13 +517,14 @@ Cursor-Bewegung und Klick erfolgen komplett über `swaymsg` (keine X11-Tools nö
 
 ### Alacritty (`~/.config/alacritty/alacritty.toml`)
 
-Schriftgröße 20pt. Ctrl-Tastenkombinationen explizit gebunden um Konflikte mit dem kitty-Protokoll über SSH zu vermeiden (Ctrl+R, Ctrl+L, Ctrl+A, Ctrl+E, Ctrl+K, Ctrl+U, Ctrl+W).
+Schrift: Noto Sans Mono 24pt. Ctrl-Tastenkombinationen explizit gebunden um Konflikte mit dem kitty-Protokoll über SSH zu vermeiden (Ctrl+R, Ctrl+L, Ctrl+A, Ctrl+E, Ctrl+K, Ctrl+U, Ctrl+W).
 
 ---
 
 ## 26. Firewall (optional)
 
 ```bash
+sudo pacman -S ufw
 sudo ufw enable
 sudo systemctl enable --now ufw
 sudo ufw default deny incoming

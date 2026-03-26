@@ -1,6 +1,7 @@
 
 [font]
-size = 20.0
+normal = { family = "Noto Sans Mono" }
+size = 24.0
 
 [keyboard]
 bindings = [
