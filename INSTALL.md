@@ -329,7 +329,7 @@ cd dotfiles
 
 ```bash
 sudo pacman -S \
-    sway swaybg swaylock swayidle \
+    sway swaybg swaylock swayidle xorg-xwayland \
     waybar \
     kanshi \
     grim slurp wl-clipboard \
@@ -360,6 +360,8 @@ yay -S rofi-wayland ydotool rate-mirrors-bin
 ```
 
 > `rofi-wayland` ersetzt `rofi` — yay fragt nach Bestätigung, mit `y` bestätigen.
+
+> `xorg-xwayland` ermöglicht X11-Apps (z.B. Newshosting AppImage) unter Sway. Sway lädt XWayland automatisch beim ersten Start einer X11-App.
 
 ---
 
