@@ -5,5 +5,11 @@ size = 20.0
 [keyboard]
 bindings = [
   { key = "Return", mods = "Shift", chars = "\u001B\r" },
-  { key = "R", mods = "Control", chars = "\u0012" }
+  { key = "R", mods = "Control", chars = "\u0012" },
+  { key = "L", mods = "Control", chars = "\u000C" },
+  { key = "A", mods = "Control", chars = "\u0001" },
+  { key = "E", mods = "Control", chars = "\u0005" },
+  { key = "K", mods = "Control", chars = "\u000B" },
+  { key = "U", mods = "Control", chars = "\u0015" },
+  { key = "W", mods = "Control", chars = "\u0017" }
 ]

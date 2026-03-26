@@ -20,4 +20,7 @@ absx=$(( offx + x_local ))
 absy=$(( offy + y_local ))
 
 swaymsg "seat seat0 cursor set $absx $absy"
-ydotool click 0x110
+sleep 0.05
+swaymsg "seat seat0 cursor press button1"
+sleep 0.05
+swaymsg "seat seat0 cursor release button1"
