@@ -257,7 +257,7 @@ bindsym $mod+p exec firefox --new-window https://www.perplexity.ai
 bindsym $mod+c exec firefox --new-window https://chatgpt.com/
 bindsym $mod+g exec firefox --new-window https://gemini.google.com/
 bindsym $mod+y exec firefox --new-window https://youtube.com
-bindsym $mod+m exec thunderbird
+bindsym $mod+m exec alacritty -e aerc
 bindsym $mod+k exec firefox --new-window https://keep.google.com
 bindsym $mod+z exec firefox --new-window "https://chatgpt.com/g/g-679357f81aec81919a017a3124b02cfe-youtube-transkript-ausfuhrlich-zusammenfassen"
 
@@ -286,8 +286,8 @@ exec dunst
 # Akkuwarnung
 exec ~/.config/sway/battery-warn.sh
 
-# Farb-/Blaulichfilter (gammastep ersetzt redshift)
-exec gammastep
+# Farb-/Blaulichfilter (gammastep ersetzt redshift, Standort Mainz)
+exec gammastep -l 49.98:8.27 -m wayland
 
 # XDG-Autostart-Einträge
 exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/
